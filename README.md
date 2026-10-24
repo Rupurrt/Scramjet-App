@@ -61,6 +61,22 @@ Resources for self-hosting:
 - https://github.com/nvm-sh/nvm
 - https://docs.titaniumnetwork.org/guides/nginx/
 - https://docs.titaniumnetwork.org/guides/vps-hosting/
+
+### Netlify frontend deployment
+
+This repository is a Fastify application, not an Expo application. The
+`netlify.toml` configuration overrides the Expo build command with
+`pnpm run build` and publishes `dist`. The build copies the frontend and the
+Scramjet, libcurl, and BareMux assets normally served by Fastify. Netlify also
+sets the cross-origin isolation headers required by the frontend.
+
+Netlify hosts only the frontend. Its Functions cannot run the persistent Wisp
+WebSocket server in `src/index.js`. To enable proxy browsing, run a Wisp server
+on a host supporting persistent WebSocket connections and set `wispUrl` in
+`public/config.js` to its public `wss://` URL before deploying. This URL is
+public browser configuration and must not contain credentials. Without that
+configuration the frontend still defaults to `/wisp/` on its own host, which
+works with `pnpm start` but is unavailable on Netlify.
 - https://docs.titaniumnetwork.org/guides/dns-setup/
 
 ### HTTP Transport

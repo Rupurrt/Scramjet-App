@@ -8,6 +8,7 @@
 		"node": ">=16.0.0"
 	},
 	"scripts": {
+		"build": "node scripts/build-web.mjs",
 		"start": "node src/index.js",
 		"format": "prettier --write .",
 		"lint": "eslint ./src/",
