@@ -47,11 +47,11 @@ form.addEventListener("submit", async (event) => {
 
 	const url = search(address.value, searchEngine.value);
 
-	let wispUrl =
+	let wispUrl = _CONFIG.wispUrl || (
 		(location.protocol === "https:" ? "wss" : "ws") +
 		"://" +
 		location.host +
-		"/wisp/";
+		"/wisp/");
 	if ((await connection.getTransport()) !== "/libcurl/index.mjs") {
 		await connection.setTransport("/libcurl/index.mjs", [
 			{ websocket: wispUrl },
